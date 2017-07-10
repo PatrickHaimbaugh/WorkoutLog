@@ -34,7 +34,7 @@ sequelize.authenticate().then(
 	});
 
 User.sync();
-//User.sync([ force: true ]);
+// User.sync({ force: true});
 
 app.use(bodyParser.json());
 
