@@ -10,18 +10,18 @@ router.post('/', function(req, res) {
 			if(user) {
 				bcrypt.compare(req.body.user.password, user.passwordhash, function(err, matches){
 					if(matches){
-						var token = jwt.sign({id: user.id}, "i_am_secret", {expiresIn: 60*60*24});
+						var token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn: 60*60*24});
 						res.json({
 							user: user,
 							message: "successfully authenticated",
 							sessionToken: token
 						});
 					}else{
-						res.status(500).send({error: "failed to authenticate now"});
+						res.status(500).send({error: "failed to authenticate"});
 					}
 				});
 			}else{
-				res.status(500).send({error: "failed to authenticate here"});
+				res.status(500).send({error: "failed to authenticate"});
 			}
 		},
 		function(err){
