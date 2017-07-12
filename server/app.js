@@ -8,16 +8,17 @@ var sequelize = require('./db.js');
 
 var User = sequelize.import('./models/user.js');
 // var User = sequelize.import(__dirname + '\\models\\user');
-User.sync(); // User.sync({ force: true}); THIS WILL DROP THE TABLE
 
+// User.sync(); // User.sync({ force: true}); THIS WILL DROP THE TABLE
+sequelize.sync();
 app.use(bodyParser.json());
+
 app.use(require('./middleware/headers'));
 app.use(require('./middleware/validate-session'));
 app.use('/api/user', require('./routes/user'));
 app.use('/api/login', require('./routes/session'));
-app.use('/api/test', function(req, res){
-	res.send("Hello World");
-});
+app.use('/api/definition', require('./routes/definition'));
+
 
 app.listen(3000, function(){
 	console.log("app is listening on 3000");
