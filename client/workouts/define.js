@@ -18,6 +18,9 @@ $(document).ready(function() {
 
 				define.done(function(data){
 					WorkoutLog.definition.userDefinitions.push(data.definition);
+					$("#def-description").val("");
+					$("#def-logType").val("");
+					$("a[href='#log']").tab('show');
 				});
 			},
 
