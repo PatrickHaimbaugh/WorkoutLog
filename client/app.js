@@ -37,6 +37,17 @@ $(document).ready(function(){
 		}
 	});
 
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function(e) {
+		var target = $(e.target).attr("href");
+		if(target === "#log"){
+			WorkoutLog.log.setDefinitions();
+		}
+
+		if(target === "#history"){
+			WorkoutLog.log.setHistory();
+		}
+	});
+	
 	$(document).on("keypress", function(e) {
 		if (e.which === 13) {
 			if($("#signup-modal").is(":visible")){
@@ -47,6 +58,7 @@ $(document).ready(function(){
 			}
 		}
 	});
+
 
 	var token = window.localStorage.getItem("sessionToken");
 	if(token) {
